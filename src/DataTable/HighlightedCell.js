@@ -31,7 +31,7 @@ const getIcon = ({ value, columnName, thresholds=[0, 5, 10] }) => {
     if (value > 0) {
       return <ArrowUpward style={{height: 18}}/>
     } else {
-      return null;
+      return <svg className='MuiSvgIcon-root-171' />;      
     }
   }
   if (value <= thresholds[0]) {
@@ -57,7 +57,7 @@ return (
       textAlign: tableColumn.align,
       ...style,
     }}>
-    {getIcon({ value, columnName: tableColumn.name, thresholds })}{value}
+    {getIcon({ value, columnName: tableColumn.column.name, thresholds })}{value}
   </TableCell>
 );
 }

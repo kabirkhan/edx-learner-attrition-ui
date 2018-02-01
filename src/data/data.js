@@ -6,5 +6,9 @@ export function getCurrentCourseRuns() {
 }
 
 export function getCoursePredictions(courseId) {
-  return getCourseData(courseId)
+  const courseRows = require('./predictions/' + courseId + '/course_demo_rows.json')
+  console.log('GETTING COURSE DATA:')
+  console.log(courseId)
+  console.log(courseRows)
+  return courseRows
 }

@@ -16,7 +16,6 @@ import {
 import red from 'material-ui/colors/red';
 
 import HighlightedCell from './HighlightedCell';
-import PredictionCell from './PredictionCell';
 import ContactCell from './ContactCell';
 
 const Cell = (props) => {
@@ -30,15 +29,23 @@ const Cell = (props) => {
   if (feature_col_names.has(props.column.name)) {
     return <HighlightedCell {...props} style={cellStyle}/>;
   }
-  if (props.column.name === 'predicted_user_dropped_out_next_week') {
-    return <PredictionCell {...props} style={cellStyle} />
-  }
   if (props.column.name === 'contact') {
     return <ContactCell {...props} style={cellStyle} />
   }
   return <Table.Cell {...props} style={cellStyle}/>;
 };
 Cell.propTypes = {
+  column: PropTypes.shape({ name: PropTypes.string }).isRequired,
+};
+
+const FilterCell = (props) => {
+  // console.log('FILTER CELL')
+  if (props.column.name === 'contact') {
+    return null;
+  }
+  return <TableFilterRow.Cell {...props} />;
+};
+FilterCell.propTypes = {
   column: PropTypes.shape({ name: PropTypes.string }).isRequired,
 };
 
@@ -67,13 +74,13 @@ class DataTable extends React.PureComponent {
         { name: 'num_video_plays', title: 'Video Plays' },
         { name: 'num_problems_attempted', title: 'Problem Attempts' },
         { name: 'num_problems_correct', title: 'Problems Correct' },
-        { name: 'num_pages_viewed', title: 'Content Page Views' },
+        { name: 'num_subsections_viewed', title: 'Content Page Views' },
         { name: 'num_forum_posts', title: 'Forum Posts' },
         { name: 'avg_forum_sentiment', title: 'Forum Sentiment' },
         { name: 'user_started_week', title: 'Week Started' },
         { name: 'user_last_active_week', title: 'Last Active Week' },
         { name: 'user_active_previous_week', title: 'Active Previous Week' },
-        { name: 'predicted_user_dropped_out_next_week', title: "Likelihood of learner drop out" },
+        { name: 'predicted_user_dropped_out_next_week_likelihood', title: "Likelihood of learner drop out" },
         { name: 'contact', title: "Contact" }
       ],
       rows: props.rows,
@@ -96,6 +103,7 @@ class DataTable extends React.PureComponent {
         <Grid
           rows={rows}
           columns={columns}>
+          <FilteringState/>
           <SortingState
             defaultSorting={[
               { columnName: 'user_id', direction: 'asc' },
@@ -104,12 +112,13 @@ class DataTable extends React.PureComponent {
 
           <GroupingState
             defaultGrouping={[{ columnName: 'course_week' }]}
-            defaultExpandedGroups={['4']} />
+            defaultExpandedGroups={['5']} />
           <PagingState
             defaultCurrentPage={0}
             defaultPageSize={20} />
 
           <IntegratedGrouping />
+          <IntegratedFiltering />
           <IntegratedSorting />
           <IntegratedPaging />
 
@@ -122,6 +131,7 @@ class DataTable extends React.PureComponent {
           <TableColumnReordering defaultOrder={columns.map(column => column.name)} />
 
           <TableHeaderRow showSortingControls />
+          <TableFilterRow cellComponent={FilterCell}/>
           <PagingPanel
             pageSizes={pageSizes} />
 
