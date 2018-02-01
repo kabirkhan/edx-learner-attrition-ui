@@ -43,7 +43,7 @@ class Navigation extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography type="title" color="inherit" className={classes.flex}>
-              Microsoft Academy - Predicting Student Churn
+              Microsoft Academy - Predicting Learner Churn
             </Typography>
           </Toolbar>
         </AppBar>

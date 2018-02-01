@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Select from 'react-select';
+import Select from 'react-select-plus';
 import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 import Navigation from './Navigation.js';
-import { DarkDataTable } from './DataTable/DataTable.js'
+import { LightDataTable, DarkDataTable } from './DataTable/DataTable.js'
 import { getCurrentCourseRuns, getCoursePredictions } from './data/data.js';
 import 'react-select-plus/dist/react-select-plus.css';
 
@@ -13,8 +15,8 @@ class App extends Component {
     super(props);
 
     const courses = getCurrentCourseRuns()
-    console.log(courses)
-    const selectedCourse = courses[0];
+    const selectedProgram = courses[0];
+    const selectedCourse = selectedProgram && selectedProgram.options[0]
     this.state = {
       courses,
       selectedCourse,
@@ -38,14 +40,24 @@ class App extends Component {
         <Navigation />
         <Grid container spacing={16} style={{ padding: 50 }}>
           <Grid item xs={12}>
-            <Select
-              name="course"
-              value={value}
-              onChange={this.handleChange}
-              options={courses} />
+            <Paper style={{ padding: 16 }}>
+              <Grid item xs={12} style={{ marginBottom: 16 }}>
+                <Typography type="title" color="inherit">
+                  Choose a course to view drop out predictions for.
+                </Typography>            
+              </Grid>
+              <Grid item xs={12}>
+                <Select
+                  name="course"
+                  value={value}
+                  onChange={this.handleChange}
+                  options={courses}
+                  style={{ borderRadius: 2 }} />
+              </Grid>
+            </Paper>
           </Grid>
           <Grid item xs={12}>
-            <DarkDataTable rows={rows}/>
+            <LightDataTable rows={rows}/>
           </Grid>
         </Grid>
       </div>

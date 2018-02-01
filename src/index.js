@@ -7,7 +7,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
     primary: { main: "#007566" },
     secondary: { main: "#005DA6" }
   }
