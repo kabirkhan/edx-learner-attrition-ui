@@ -4,3 +4,7 @@ body {
   font-family: sans-serif;
   background: '#424242';
 }
+
+.Select-menu-outer {
+  z-index: 999 !important;
+}

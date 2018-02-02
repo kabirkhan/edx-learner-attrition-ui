@@ -11,7 +11,8 @@ const styles = {
     width: '100%',
   },
   flex: {
-    flex: 1
+    flex: 1,
+    fontWeight: 'bold'
   }
 };
 

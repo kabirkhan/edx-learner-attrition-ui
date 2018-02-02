@@ -27,18 +27,19 @@ const styles = theme => ({
 });
 
 const getIcon = ({ value, columnName, thresholds=[0, 5, 10] }) => {
+  const emptySvg = <svg className='MuiSvgIcon-root-171' style={{height: 24, width:24}} />;
   if (columnName === 'num_forum_posts') {
     if (value > 0) {
       return <ArrowUpward style={{height: 18}}/>
     } else {
-      return <svg className='MuiSvgIcon-root-171' />;      
+      return emptySvg
     }
   }
   if (value <= thresholds[0]) {
     return <ArrowDownward style={{height: 18}}/>
   }
   if (value < thresholds[1]) {
-    return <svg className='MuiSvgIcon-root-171' />;      
+    return emptySvg
   }
   if (value < thresholds[2]) {
     return <ArrowUpward style={{height: 18}}/>
