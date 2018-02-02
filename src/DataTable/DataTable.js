@@ -99,52 +99,50 @@ class DataTable extends React.PureComponent {
     } = this.state;
 
     return (
-      <Paper>
-        <Grid
-          rows={rows}
-          columns={columns}>
-          <FilteringState/>
-          <SortingState
-            defaultSorting={[
-              { columnName: 'user_id', direction: 'asc' },
-              { columnName: 'course_week', direction: 'desc' },
-            ]} />
-
-          <GroupingState
-            defaultGrouping={[{ columnName: 'course_week' }]}
-            defaultExpandedGroups={['5']} />
-          <PagingState
-            defaultCurrentPage={0}
-            defaultPageSize={20} />
-
-          <IntegratedGrouping />
-          <IntegratedFiltering />
-          <IntegratedSorting />
-          <IntegratedPaging />
-
-          <DragDropProvider />
-
-          <Table
-            columnExtensions={tableColumnExtensions}
-            cellComponent={Cell} />
-
-          <TableColumnReordering defaultOrder={columns.map(column => column.name)} />
-
-          <TableHeaderRow showSortingControls />
-          <TableFilterRow cellComponent={FilterCell}/>
-          <PagingPanel
-            pageSizes={pageSizes} />
-
-          <TableGroupRow />            
-          <TableColumnVisibility defaultHiddenColumnNames={[
-            'avg_forum_sentiment', 'user_started_week', 
-            'user_last_active_week', 'user_active_previous_week'
+      <Grid
+        rows={rows}
+        columns={columns}>
+        <FilteringState/>
+        <SortingState
+          defaultSorting={[
+            { columnName: 'user_id', direction: 'asc' },
+            { columnName: 'course_week', direction: 'desc' },
           ]} />
-          <Toolbar />
-          <GroupingPanel showSortingControls />
-          <ColumnChooser />
-        </Grid>
-      </Paper>
+
+        <GroupingState
+          defaultGrouping={[{ columnName: 'course_week' }]}
+          defaultExpandedGroups={['5']} />
+        <PagingState
+          defaultCurrentPage={0}
+          defaultPageSize={20} />
+
+        <IntegratedGrouping />
+        <IntegratedFiltering />
+        <IntegratedSorting />
+        <IntegratedPaging />
+
+        <DragDropProvider />
+
+        <Table
+          columnExtensions={tableColumnExtensions}
+          cellComponent={Cell} />
+
+        <TableColumnReordering defaultOrder={columns.map(column => column.name)} />
+
+        <TableHeaderRow showSortingControls />
+        <TableFilterRow cellComponent={FilterCell}/>
+        <PagingPanel
+          pageSizes={pageSizes} />
+
+        <TableGroupRow />            
+        <TableColumnVisibility defaultHiddenColumnNames={[
+          'avg_forum_sentiment', 'user_started_week', 
+          'user_last_active_week', 'user_active_previous_week'
+        ]} />
+        <Toolbar />
+        <GroupingPanel showSortingControls />
+        <ColumnChooser />
+      </Grid>
     );
   }
 }
