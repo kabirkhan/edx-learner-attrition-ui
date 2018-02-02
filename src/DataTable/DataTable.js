@@ -14,6 +14,7 @@ import {
   TableColumnVisibility, ColumnChooser,
 } from '@devexpress/dx-react-grid-material-ui';
 import red from 'material-ui/colors/red';
+import blueGrey from 'material-ui/colors/blueGrey';
 
 import HighlightedCell from './HighlightedCell';
 import ContactCell from './ContactCell';
@@ -32,6 +33,9 @@ const Cell = (props) => {
   if (props.column.name === 'contact') {
     return <ContactCell {...props} style={cellStyle} />
   }
+  if (props.column.name === 'predicted_user_dropped_out_next_week_likelihood') {
+    cellStyle['backgroundColor'] = blueGrey[100]
+  }
   return <Table.Cell {...props} style={cellStyle}/>;
 };
 Cell.propTypes = {
@@ -39,7 +43,6 @@ Cell.propTypes = {
 };
 
 const FilterCell = (props) => {
-  // console.log('FILTER CELL')
   if (props.column.name === 'contact') {
     return null;
   }
