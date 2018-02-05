@@ -74,13 +74,16 @@ class App extends Component {
         <Navigation />
         <Grid container spacing={16} style={{ padding: 50 }}>
           <Grid item xs={12}>
-            <ExpansionPanel expanded={true}>
+            {/* Step 1. Select Course */}
+            <ExpansionPanel 
+              expanded={true}
+              CollapseProps={{ style: { overflow: 'visible' } }}>
               <ExpansionPanelSummary>
                 <Grid item xs={12}>
                   <SectionHeader title='Step 1. Choose a course'/>
                 </Grid>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails style={{ overflow: 'visible' }}>          
+              <ExpansionPanelDetails>
                 <Grid item xs={12}>
                   <Select
                     name="course"
@@ -92,6 +95,7 @@ class App extends Component {
               </ExpansionPanelDetails>
             </ExpansionPanel>
         
+            {/* Step 2. Prediction button */}
             <ExpansionPanel expanded={showRunButton}>
               <ExpansionPanelSummary>
                 <Grid item xs={12}>
@@ -110,11 +114,13 @@ class App extends Component {
                 </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
+
+            {/* Step 3. Data grid */}
             <ExpansionPanel expanded={showLoadingIndicator || showDataGrid}>
               <ExpansionPanelSummary>
                 <Grid item xs={12}>
                   <SectionHeader 
-                    title='Step 3. Contact at-risk learners to re-engage them in the course' />
+                    title='Step 3. Contact at risk learners to re-engage them in the course' />
                 </Grid>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
@@ -136,11 +142,3 @@ class App extends Component {
 }
 
 export default App;
-{/* {showLoadingIndicator &&
-            
-          }
-          {showDataGrid &&
-          <Grid item xs={12}>
-            
-          </Grid>
-          } */}

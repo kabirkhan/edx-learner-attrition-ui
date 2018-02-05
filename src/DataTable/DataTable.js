@@ -35,6 +35,7 @@ const Cell = (props) => {
   }
   if (props.column.name === 'predicted_user_dropped_out_next_week_likelihood') {
     cellStyle['backgroundColor'] = blueGrey[100]
+    props = {...props, value: props.value === 'Maybe' ? 'Medium' : props.value}
   }
   return <Table.Cell {...props} style={cellStyle}/>;
 };
@@ -83,8 +84,8 @@ class DataTable extends React.PureComponent {
         { name: 'user_started_week', title: 'Week Started' },
         { name: 'user_last_active_week', title: 'Last Active Week' },
         { name: 'user_active_previous_week', title: 'Active Previous Week' },
-        { name: 'predicted_user_dropped_out_next_week_likelihood', title: "Likelihood of learner drop out" },
-        { name: 'contact', title: "Contact" }
+        { name: 'predicted_user_dropped_out_next_week_likelihood', title: "Learner drop out risk" },
+        { name: 'contact', title: "Actions" }
       ],
       rows: props.rows,
       pageSizes: [10, 20, 50, 100],
